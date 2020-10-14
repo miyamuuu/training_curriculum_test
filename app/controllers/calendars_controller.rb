@@ -19,7 +19,6 @@ class CalendarsController < ApplicationController
   private
 
   def plan_params
-    binding.pry
     params.require(:plan).permit(:date, :plan)
   end
 
