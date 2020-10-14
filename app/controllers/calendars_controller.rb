@@ -3,6 +3,10 @@ class CalendarsController < ApplicationController
   # １週間のカレンダーと予定が表示されるページ
   def index
     getWeek
+    # 1, planのインスタンスを生成する
+    # ２，from_withにモデル（@plan）を指定する
+    # ３，params.require(:plan)でパラメーターで送られてきた値を許可する
+    
     @plan = Plan.new
   end
 
@@ -15,7 +19,8 @@ class CalendarsController < ApplicationController
   private
 
   def plan_params
-    params.require(:calendars).permit(:date, :plan)
+    binding.pry
+    params.require(:plan).permit(:date, :plan)
   end
 
   def getWeek
