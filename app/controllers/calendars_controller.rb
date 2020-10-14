@@ -3,7 +3,7 @@ class CalendarsController < ApplicationController
   # １週間のカレンダーと予定が表示されるページ
   def index
     getWeek
-    # 1, planのインスタンスを生成する
+    # 1,　planのインスタンスを生成する
     # ２，from_withにモデル（@plan）を指定する
     # ３，params.require(:plan)でパラメーターで送られてきた値を許可する
     
@@ -38,6 +38,12 @@ class CalendarsController < ApplicationController
       plan = plans.map do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
+      wday_num = data.today.wday + x
+        if wday_num >= 7
+          wday_num =wday_num - 7
+        end
+      puts wdays[wday_num]
+
       days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
       @week_days.push(days)
     end
