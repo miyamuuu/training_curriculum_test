@@ -38,15 +38,21 @@ class CalendarsController < ApplicationController
       plan = plans.map do |plan|
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
-      wday_num = data.today.wday + x
-        if wday_num >= 7
-          wday_num =wday_num - 7
-        end
-      puts wdays[wday_num]
 
-      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
+      n = Date.today.wday + x
+      if n >= 7
+        n = n - 7
+      else
+      end
+
+      days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :week => wdays[n], :plans => today_plans }
       @week_days.push(days)
     end
-
   end
 end
+
+# index 15行目に曜日を表示させる記述：daysの中にキーを作り、それを取得するday[:month]と同じような書き方
+# wdays[n]をそのキーのバリューとして指定してあげる
+# →水〜土まで出力できる
+# ７を超えた場合の条件分岐を考え出す
+# ブロック変数について復習
